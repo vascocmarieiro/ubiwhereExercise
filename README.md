@@ -2,6 +2,9 @@
 
 
 This API was developed in Python and Flask.
+The database was developed in SQL Alchemy
+
+
 The Postman collection is in the directory folder and is called Locations.postman_collection.json.
 
 Information about endpoints:
