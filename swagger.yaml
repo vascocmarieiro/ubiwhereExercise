@@ -1,0 +1,152 @@
+swagger: "2.0"
+info:
+  description: This is the swagger file that goes with our server code
+  version: "1.0.0"
+  title: Swagger ReST Article
+consumes:
+  - application/json
+produces:
+  - application/json
+
+basePath: /
+
+# Paths supported by the server application
+paths:
+  /tasks:
+    get:
+      operationId: crud.get_tasks
+      tags:
+        - Tasks
+      summary: Read the entire list of tasks
+      description: Read the list of tasks
+     
+      responses:
+        200:
+          description: Successfully read task list operation
+          schema:
+            type: array
+            items:
+              properties:
+                author:
+                  type: string
+                category:
+                  type: string
+                created:
+                  type: string
+                description:
+                  type: string
+                id:
+                  type: integer
+                local: 
+                  type: string
+                updated:
+                  type: string
+                
+
+    post:
+      operationId: crud.add_task
+      tags:
+        - Task
+      summary: Create a task and add it to the database
+      description: Create a new task in the database
+      parameters:
+        - name: task
+          in: body
+          description: task to create
+          required: True
+          schema:
+            type: object
+            properties:
+              author:
+                type: string
+                description: Name os person that creates
+              category:
+                type: string
+                description: task's category
+              description:
+                type: string
+                description: task's description
+              local:
+                type: string
+                description: task's location
+                
+              
+      responses:
+        200:
+          description: Successfully created task in database
+
+  /tasks/{id}:
+    get:
+      operationId: crud.task_detail
+      tags:
+        - Task
+      summary: Read one task from the database
+      description: Read one task from the database
+      parameters:
+        - name: id
+          in: path
+          description: id of the task to get from the database
+          type: integer
+          required: True
+      responses:
+        200:
+          description: Successfully read person from people list operation
+          
+
+    put:
+      operationId: crud.task_update
+      tags:
+        - Task
+      summary: Update a task in the database
+      description: Update a task in the database
+      parameters:
+        - name: id
+          in: path
+          description: id of the task to get from the database
+          type: integer
+          required: True
+        - name: username
+          in: path
+          description: username to authenticate
+          type: string
+          required: True
+        - name: password
+          in: path
+          description: password to authenticate
+          type: string
+          required: True
+        - name: task
+          in: body
+          schema:
+            type: object
+            properties:
+              author:
+                type: string
+                description: Name os person that creates
+              category:
+                type: string
+                description: task's category
+              description:
+                type: string
+                description: task's description
+              local:
+                type: string
+                description: task's location
+      responses:
+        200:
+          description: Successfully updated task in database
+
+    delete:
+      operationId: crud.task_delete
+      tags:
+        - Task
+      summary: Delete a task from the database
+      description: Delete a task
+      parameters:
+        - name: id
+          in: path
+          type: integer
+          required: True
+      responses:
+        200:
+          description: Successfully deleted a task from database
